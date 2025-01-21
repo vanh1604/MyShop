@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Dashboard = ({ data }) => {
+const Dashboard = ({ data, removeProduct }) => {
   return (
     <div>
       <h1 className="text-3xl">hello admin</h1>
@@ -34,10 +34,17 @@ const Dashboard = ({ data }) => {
                 )}
               </td>
               <td className="flex gap-2 items-center ">
-                <button className="btn btn-danger">Delete</button>
-                <button className="px-4 py-2 bg-blue-500 text-white">
-                  Edit
+                <button
+                  className="btn btn-danger"
+                  onClick={() => removeProduct(item.id)}
+                >
+                  Delete
                 </button>
+                <Link to={`/admin/product-edit/${item.id}`}>
+                  <button className="px-4 py-2 bg-blue-500 text-white">
+                    Edit
+                  </button>
+                </Link>
               </td>
             </tr>
           ))}

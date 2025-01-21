@@ -5,13 +5,15 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import LoginPage from "./pages/LoginPage";
+
 import { useEffect, useState } from "react";
 import instance from "./axios";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Dashboard from "./pages/admin/Dashboard";
-import ProductAdd from "./pages/admin/ProductAdd";
+import ProductForm from "./pages/ProductForm";
+import AuthForm from "./pages/AuthForm";
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -28,21 +30,33 @@ function App() {
     }
     fetchProducts();
   }, []);
-  const handleSubmit = (data) => {
-    async function fetchProducts() {
+
+  const removeProduct = (id) => {
+    (async () => {
       try {
-        const res = await instance.post("/products", data);
-        console.log(res.data);
-        setProducts([...products, res.data]);
-        alert("Product added successfully,redirecting to admin page");
-        navigate("/admin");
+        if (window.confirm("Are you sure you want to delete this product?")) {
+          await instance.delete(`/products/${id}`);
+          const newDatas = await instance.get("/products");
+          setProducts(newDatas.data);
+        }
       } catch (error) {
         console.log(error);
       }
-    }
-    fetchProducts();
+    })();
   };
+  const handleProduct = async (data) => {
+    if (data.id) {
+      await instance.patch(`/products/${data.id}`, data);
+      const newDatas = await instance.get("/products");
+      setProducts(newDatas.data);
+    } else {
+      const res = await instance.post("/products", data);
 
+      setProducts([...products, res.data]);
+    }
+    alert("successfully,redirecting to admin page");
+    navigate("/admin");
+  };
   return (
     <div>
       <Header />
@@ -52,13 +66,21 @@ function App() {
       <Routes>
         <Route path="/" element={<Home product={products} />} />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<AuthForm />} />
+        <Route path="/register" element={<AuthForm isRegister />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/admin" element={<Dashboard data={products} />} />
+        <Route
+          path="/admin"
+          element={<Dashboard data={products} removeProduct={removeProduct} />}
+        />
         <Route
           path="/admin/product-add"
-          element={<ProductAdd onAdd={handleSubmit} />}
+          element={<ProductForm handleProduct={handleProduct} />}
+        />
+        <Route
+          path="/admin/product-edit/:id"
+          element={<ProductForm handleProduct={handleProduct} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

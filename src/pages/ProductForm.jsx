@@ -1,29 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useParams } from "react-router-dom";
+import instance from "../axios";
+
 const productSchema = z.object({
   title: z.string().min(3, { message: "Required" }).max(100),
   price: z.number().min(0),
   description: z.string().optional(),
 });
-const ProductAdd = ({ onAdd }) => {
+const ProductForm = ({ handleProduct }) => {
+  const { id } = useParams();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(productSchema),
   });
   const onSubmit = (data) => {
-    onAdd(data);
+    handleProduct({ ...data, id: id });
   };
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        const res = await instance.get(`/products/${id}`);
+
+        reset(res.data);
+      })();
+    }
+  }, [id]);
 
   return (
-    <div className="max-w-lg   mx-auto p-6 bg-white shadow-lg rounded-lg pt-[120px] ">
-      <div>
+    <div className="w-full min-h-screen flex items-center justify-center  ">
+      <div className=" h-fit w-[500px]  p-6 bg-white shadow-lg rounded-lg ">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-          Add Product
+        {id ? "Edit" : "Add"} Product
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
           {/* Title Input */}
@@ -94,7 +108,7 @@ const ProductAdd = ({ onAdd }) => {
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            Add Product
+            {id ? "Edit" : "Add"} Product
           </button>
         </form>
       </div>
@@ -102,4 +116,4 @@ const ProductAdd = ({ onAdd }) => {
   );
 };
 
-export default ProductAdd;
+export default ProductForm;

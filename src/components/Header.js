@@ -9,7 +9,7 @@ const Header = () => {
     <header className="flex justify-between items-center p-4">
       <h1 className="text-3xl">My Website</h1>
       <nav>
-        <ul className="flex gap-4">
+        <ul className="flex gap-4 items-center">
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -21,6 +21,11 @@ const Header = () => {
           </li>
           <li>
             <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/register">
+              <button className="btn border border-blue-400 bg-slate-400 text-orange-700">Register</button>
+            </Link>
           </li>
         </ul>
       </nav>
