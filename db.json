@@ -5,7 +5,7 @@
       "title": "Powder Canister",
       "description": "The Powder Canister is a finely milled setting powder designed to set makeup and control shine. With a lightweight and translucent formula, it provides a smooth and matte finish.",
       "category": "beauty",
-      "price": 15,
+      "price": 16,
       "discountPercentage": 18.14,
       "rating": 3.82,
       "stock": 59,
@@ -1675,6 +1675,13 @@
         "https://cdn.dummyjson.com/products/images/groceries/Kiwi/1.png"
       ],
       "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Kiwi/thumbnail.png"
+    },
+    {
+      "title": "cat",
+      "price": 100,
+      "description": "dog",
+      "thumbnail": "https://images.unsplash.com/photo-1737069222401-afd3720775ae?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": 31
     }
   ],
   "users": [
