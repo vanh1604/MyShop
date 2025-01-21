@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -35,7 +35,7 @@ const ProductForm = ({ handleProduct }) => {
         reset(res.data);
       })();
     }
-  }, [id]);
+  }, []);
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center  ">
@@ -97,6 +97,7 @@ const ProductForm = ({ handleProduct }) => {
               name="thumbnail"
               id="thumbnail"
               className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter product thumbnail"
               {...register("thumbnail")}
             />
             {errors.thumbnail?.message && (

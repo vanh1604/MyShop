@@ -1,4 +1,4 @@
-import userEvent from "@testing-library/user-event";
+
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 

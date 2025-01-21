@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React, { useEffect, useState } from "react";
 import avatar from "../assets/avatar.png";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 
 import instance from "../axios";
 
