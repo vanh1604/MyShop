@@ -43,7 +43,7 @@ const Header = () => {
             <li className="flex gap-6 items-center">
               {check ? (
                 <div className="flex items-center gap-4">
-                  <img src={avatar} className="w-10 h-10 rounded-full" />
+                  <img src={avatar} alt="avata" className="w-10 h-10 rounded-full" />
                   <h2 className="text-xl">{user.email}</h2>
                 </div>
               ) : (
