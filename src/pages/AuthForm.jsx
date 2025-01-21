@@ -10,7 +10,7 @@ const schema = z.object({
   password: z.string().min(6),
 });
 const AuthForm = ({ isRegister }) => {
-  console.log(isRegister);
+  
 
   const navigate = useNavigate();
   const {
@@ -32,8 +32,8 @@ const AuthForm = ({ isRegister }) => {
           const res = await instance.post("/login", data);
           localStorage.setItem("token", JSON.stringify(res.data));
           if (res.status === 200) {
-            alert("Login successfully,redirecting to home page");
-            navigate("/");
+            alert("Login successfully,redirecting to shop page");
+            navigate("/shop");
           }
         }
       } catch (error) {

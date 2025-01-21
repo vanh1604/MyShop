@@ -1,11 +1,9 @@
 import Header from "./components/Header";
-import Main from "./components/Main";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-
 import { useEffect, useState } from "react";
 import instance from "./axios";
 import Shop from "./pages/Shop";
@@ -13,7 +11,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductForm from "./pages/ProductForm";
 import AuthForm from "./pages/AuthForm";
-
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -60,28 +58,31 @@ function App() {
   return (
     <div>
       <Header />
-      <Main />
 
       {/* <NotFoundPage /> */}
       <Routes>
-        <Route path="/" element={<Home product={products} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<AuthForm />} />
         <Route path="/register" element={<AuthForm isRegister />} />
         <Route path="/product/:id" element={<ProductDetail />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route
-          path="/admin"
-          element={<Dashboard data={products} removeProduct={removeProduct} />}
-        />
-        <Route
-          path="/admin/product-add"
-          element={<ProductForm handleProduct={handleProduct} />}
-        />
-        <Route
-          path="/admin/product-edit/:id"
-          element={<ProductForm handleProduct={handleProduct} />}
-        />
+        <Route path="/shop" element={<Shop product={products} />} />
+        <Route path="/admin" element={<PrivateRoute />}>
+          <Route
+            path="/admin"
+            element={
+              <Dashboard data={products} removeProduct={removeProduct} />
+            }
+          />
+          <Route
+            path="/admin/product-add"
+            element={<ProductForm handleProduct={handleProduct} />}
+          />
+          <Route
+            path="/admin/product-edit/:id"
+            element={<ProductForm handleProduct={handleProduct} />}
+          />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

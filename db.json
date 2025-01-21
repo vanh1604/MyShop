@@ -1623,7 +1623,7 @@
       "title": "Kiwi",
       "description": "Nutrient-rich kiwi, perfect for snacking or adding a tropical twist to your dishes.",
       "category": "groceries",
-      "price": 2.49,
+      "price": 349,
       "discountPercentage": 10.32,
       "rating": 4.37,
       "stock": 1,
@@ -1677,10 +1677,11 @@
       "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Kiwi/thumbnail.png"
     },
     {
-      "title": "iphone 3",
-      "price": 2,
-      "description": "not good",
-      "id": 36
+      "title": "book",
+      "price": 10,
+      "description": "book",
+      "thumbnail": "https://dictionary.cambridge.org/vi/images/full/book_noun_001_01679.jpg?version=6.0.43",
+      "id": 31
     }
   ],
   "users": [

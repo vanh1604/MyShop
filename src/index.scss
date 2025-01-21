@@ -11,10 +11,11 @@ html {
 }
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #d3a440;
   text-decoration: inherit;
   &:hover {
-    color: #535bf2;
+    font-weight: 800;
+    color: #ecf013;
   }
 }
 header {
@@ -25,6 +26,7 @@ header {
   z-index: 99;
   background-color: #111;
   color: #eee;
+ 
 }
 main {
   margin-top: 120px;

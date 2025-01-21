@@ -9,6 +9,8 @@ const productSchema = z.object({
   title: z.string().min(3, { message: "Required" }).max(100),
   price: z.number().min(0),
   description: z.string().optional(),
+  thumbnail: z.string().url(),
+    
 });
 const ProductForm = ({ handleProduct }) => {
   const { id } = useParams();
@@ -22,6 +24,8 @@ const ProductForm = ({ handleProduct }) => {
   });
   const onSubmit = (data) => {
     handleProduct({ ...data, id: id });
+    console.log(data);
+    
   };
   useEffect(() => {
     if (id) {
@@ -37,7 +41,7 @@ const ProductForm = ({ handleProduct }) => {
     <div className="w-full min-h-screen flex items-center justify-center  ">
       <div className=" h-fit w-[500px]  p-6 bg-white shadow-lg rounded-lg ">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        {id ? "Edit" : "Add"} Product
+          {id ? "Edit" : "Add"} Product
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
           {/* Title Input */}
@@ -81,7 +85,24 @@ const ProductForm = ({ handleProduct }) => {
               <p className="text-red-500">{errors.price?.message}</p>
             )}
           </div>
-
+          <div className="flex flex-col">
+            <label
+              htmlFor="thumbnail"
+              className="text-sm font-medium text-gray-700"
+            >
+              Thumbnail
+            </label>
+            <input
+              type="text"
+              name="thumbnail"
+              id="thumbnail"
+              className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              {...register("thumbnail")}
+            />
+            {errors.thumbnail?.message && (
+              <p className="text-red-500">{errors.thumbnail?.message}</p>
+            )}
+          </div>
           {/* Description Input */}
           <div className="flex flex-col">
             <label

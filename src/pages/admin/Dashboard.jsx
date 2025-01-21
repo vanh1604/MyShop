@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = ({ data, removeProduct }) => {
   return (
-    <div>
+    <div className="container">
       <h1 className="text-3xl">hello admin</h1>
       <Link to="/admin/product-add" className="btn btn-primary">
         Add new product
@@ -26,25 +26,27 @@ const Dashboard = ({ data, removeProduct }) => {
               <td>{item.title}</td>
               <td>{item.description || "Dang Cap Nhat"}</td>
               <td>{item.price}</td>
-              <td>
+              <td className="object-cover w-[200px] h-[200px]">
                 {item.thumbnail ? (
                   <img src={item.thumbnail} alt="" />
                 ) : (
                   "Dang Cap Nhat"
                 )}
               </td>
-              <td className="flex gap-2 items-center ">
-                <button
-                  className="btn btn-danger"
-                  onClick={() => removeProduct(item.id)}
-                >
-                  Delete
-                </button>
-                <Link to={`/admin/product-edit/${item.id}`}>
-                  <button className="px-4 py-2 bg-blue-500 text-white">
-                    Edit
+              <td className="">
+                <div className=" flex gap-4">
+                  <button
+                    className="btn btn-danger w-[100px]"
+                    onClick={() => removeProduct(item.id)}
+                  >
+                    Delete
                   </button>
-                </Link>
+                  <Link to={`/admin/product-edit/${item.id}`}>
+                    <button className="btn btn-primary w-[100px]">
+                      Edit
+                    </button>
+                  </Link>
+                </div>
               </td>
             </tr>
           ))}
